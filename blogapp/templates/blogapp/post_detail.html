@@ -1,0 +1,25 @@
+{% extends 'blogapp/base.html' %}
+
+
+{% block title %}Home {% endblock %}
+
+{% block content %}
+
+<!-- ======================= view for blog post each =============================== -->
+
+<article class="media content-section">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="{% url 'user_posts' object.author.username %}">{{object.author}}</a>
+            <small class="">{{object.date_posted|date:"F d ,Y"}}</small>
+        </div>
+        {% if object.author == user %}
+        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post_update'  object.id %}">Update</a>
+        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post_delete'  object.id %}">Delete</a>
+        {% endif %}
+        <h3 class="article-title" >{{object.title}}</h3>
+        <p class="article-content" >{{object.content}} </p>
+    </div>
+</article>
+
+{% endblock %}
